@@ -1,0 +1,41 @@
+version: "3"
+services:
+  balance:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./balance/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - frontnet
+  app1:
+    image: nginx:latest
+    volumes:
+      - ./app1/nginx.conf:/etc/nginx/nginx.conf
+      - ./app1/html/:/usr/share/nginx/html/
+    ports:
+      - "81:80"
+    networks:
+      - frontnet
+  app2:
+    image: nginx:latest
+    volumes:
+      - ./app2/nginx.conf:/etc/nginx/nginx.conf
+      - ./app2/html/:/usr/share/nginx/html/
+    ports:
+      - "82:80"
+    networks:
+      - frontnet
+  app3:
+    image: nginx:latest
+    volumes:
+      - ./app3/nginx.conf:/etc/nginx/nginx.conf
+      - ./app3/html/:/usr/share/nginx/html/
+    ports:
+      - "83:80"
+    networks:
+      - frontnet
+networks:
+  frontnet:
+    driver: bridge
+
